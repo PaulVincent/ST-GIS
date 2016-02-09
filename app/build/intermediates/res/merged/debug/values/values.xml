@@ -36,8 +36,8 @@
     <string name="WFSDialogTitle">New Service</string>
     <string name="WFSName">Name:</string>
     <string name="WFS_delete">Delete Service</string>
-    <string name="app_name">G-REX3D</string>
+    <string name="app_name">ST-GIS</string>
     <string name="cancelItem">Cancel</string>
     <string name="data_selection">Choose resource type</string>
-    <string name="hello">Hello World, G_REX3DActivity!</string>
+    <string name="hello">Hello World, ST-GIS!</string>
 </resources>

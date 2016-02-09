@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, G_REX3DActivity!</string>
-    <string name="app_name">G-REX3D</string>
+    <string name="hello">Hello World, ST-GIS!</string>
+    <string name="app_name">ST-GIS</string>
     
     <!--  Widget labels -->
     <string name="WFS">Web Feature Service</string>

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.andredittrich.dataresource"
+        applicationId "edu.kit.gik.STGIS.dataresource"
         minSdkVersion 14
         targetSdkVersion 14
         compileOptions {

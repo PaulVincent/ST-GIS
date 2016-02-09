@@ -1,8 +1,5 @@
 package edu.kit.gik.STGIS.view3d;
 
-import java.io.IOException;
-import java.util.List;
-
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
@@ -11,6 +8,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * A simple wrapper around a Camera and a SurfaceView that renders a centered
@@ -40,7 +40,8 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
 	}
 	
 	public void setCamera(Camera camera) {
-		mCamera = camera;
+		mCamera = camera.open();
+
 		if (mCamera != null) {
 			mSupportedPreviewSizes = mCamera.getParameters()
 					.getSupportedPreviewSizes();
@@ -180,11 +181,14 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
 		// Now that the size is known, set up the camera parameters and begin
 		// the preview.
 
-		Camera.Parameters parameters = mCamera.getParameters();
-		parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
-		requestLayout();
+        if (mCamera == null)
+            mCamera = Camera.open();
 
-		mCamera.setParameters(parameters);
+        Camera.Parameters parameters = mCamera.getParameters();
+        parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+        requestLayout();
+
+        mCamera.setParameters(parameters);
 		mCamera.startPreview();
 	}
 

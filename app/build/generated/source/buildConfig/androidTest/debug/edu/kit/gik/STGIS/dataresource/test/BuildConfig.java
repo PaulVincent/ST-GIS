@@ -5,7 +5,7 @@ package edu.kit.gik.STGIS.dataresource.test;
 
 public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");
-  public static final String APPLICATION_ID = "com.andredittrich.dataresource.test";
+  public static final String APPLICATION_ID = "edu.kit.gik.STGIS.dataresource.test";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "";
   public static final int VERSION_CODE = -1;

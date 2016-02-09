@@ -9,8 +9,8 @@
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="com.andredittrich.dataresource"
+                     android:targetPackage="edu.kit.gik.STGIS.dataresource"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for com.andredittrich.dataresource"/>
+                     android:label="Tests for edu.kit.gik.STGIS.dataresource"/>
 </manifest>

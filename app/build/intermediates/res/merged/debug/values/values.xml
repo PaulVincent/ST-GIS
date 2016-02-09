@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="AddWFSButtonText">Add Service</string>
+    <string name="AddWFSTitle">Choose Web Feature Service</string>
+    <string name="Capabilities">REQUEST=GetCapabilities</string>
+    <string name="DELETED">deleted</string>
+    <string name="DIALOG_ADDWFS">DIALOG_ADDWFS</string>
+    <string name="DataFolder">data</string>
+    <string name="Describe">REQUEST=DescribeFeatureType</string>
+    <string name="Extensions">ts,xml</string>
+    <string name="FAILED">failed</string>
+    <string name="FEATURE_TYPE_TAG">Name</string>
+    <string name="Feature">REQUEST=GetFeature</string>
+    <string name="FeatureTypeTitle">Choose Data Set</string>
+    <string name="FileName">FILENAME</string>
+    <string name="FileSize">FILESIZE</string>
+    <string name="HTTP">http://</string>
+    <string name="KVP_Separator">&amp;</string>
+    <string name="NOGOCAD">No GOCAD-Format available</string>
+    <string name="NOWEB">No connection to network!</string>
+    <string name="NOWFS">No WFS or WFS not online!</string>
+    <string name="NoData">No suitable data</string>
+    <string name="READFILEERROR">Can\'t read file</string>
+    <string name="SDCard">SD Card</string>
+    <string name="SRS_TAG">DefaultSRS</string>
+    <string name="TSFilesTitle">Choose Data Set</string>
+    <string name="TSObject">TSOBJECT</string>
+    <string name="TS_delete">Delete File</string>
+    <string name="Type">SERVICE=WFS</string>
+    <string name="Typename">TYPENAME= </string>
+    <string name="Version100">VERSION=1.0.0</string>
+    <string name="Version110">VERSION=1.1.0</string>
+    <string name="Version20">VERSION=2.0</string>
+    <string name="WFS">Web Feature Service</string>
+    <string name="WFSBaseURL">Base URL:</string>
+    <string name="WFSDialogTitle">New Service</string>
+    <string name="WFSName">Name:</string>
+    <string name="WFS_delete">Delete Service</string>
+    <string name="app_name">G-REX3D</string>
+    <string name="cancelItem">Cancel</string>
+    <string name="data_selection">Choose resource type</string>
+    <string name="hello">Hello World, G_REX3DActivity!</string>
+</resources>

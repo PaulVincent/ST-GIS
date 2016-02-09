@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/pkuper/AndroidStudioProjects/STMGIS/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
+        "source": "/home/pkuper/AndroidStudioProjects/STMGIS/app/src/main/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/pkuper/AndroidStudioProjects/STMGIS/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/erdegreentest.png",
+        "source": "/home/pkuper/AndroidStudioProjects/STMGIS/app/src/main/res/drawable-hdpi/erdegreentest.png"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/pkuper/AndroidStudioProjects/STMGIS/app/build/intermediates/res/merged/debug/menu/ts_context_menu.xml",
+        "source": "/home/pkuper/AndroidStudioProjects/STMGIS/app/src/main/res/menu/ts_context_menu.xml"
+    },
+    {
+        "merged": "/home/pkuper/AndroidStudioProjects/STMGIS/app/build/intermediates/res/merged/debug/menu/wfs_context_menu.xml",
+        "source": "/home/pkuper/AndroidStudioProjects/STMGIS/app/src/main/res/menu/wfs_context_menu.xml"
+    }
+]

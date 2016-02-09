@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     
-    package="com.andredittrich.dataresource"
+    package="edu.kit.gik.STGIS.dataresource"
     android:versionCode="1"
     android:versionName="1.0" >
 	<!--package="com.andredittrich.main" -->
@@ -23,7 +23,7 @@
         android:icon="@drawable/erdegreentest"
         android:label="@string/app_name" android:debuggable="true">
         <activity
-            android:name=".ResourceSelection"
+            android:name="edu.kit.gik.STGIS.dataresource.ResourceSelection"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.andredittrich.view3d.InteractiveActivity"
+            android:name="edu.kit.gik.STGIS.view3d.InteractiveActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.andredittrich.view3d.ARActivity"
+            android:name="edu.kit.gik.STGIS.view3d.ARActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -47,21 +47,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WFSSelection"
+            android:name="edu.kit.gik.STGIS.dataresource.WFSSelection"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".FeatureTypeSelection"
+            android:name="edu.kit.gik.STGIS.dataresource.FeatureTypeSelection"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".DataOnSDSelection"
+            android:name="edu.kit.gik.STGIS.dataresource.DataOnSDSelection"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />

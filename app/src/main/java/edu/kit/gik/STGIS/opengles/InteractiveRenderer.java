@@ -133,7 +133,7 @@ public class InteractiveRenderer implements Renderer {
 	 "uniform mat4 uMVPMatrix;      \n"
 	 + "uniform mat4 u_MVMatrix;       \n"
 	 + "uniform vec3 u_LightPos;       \n"
-	 + "vec4 a_Color = vec4(0, 1, 1, 1.0);     \n"
+	 + "vec4 a_Color = vec4(1, 0.1, 0, 1.0);     \n"
 	 + "attribute vec4 vPosition;     \n"
 	 + "attribute vec3 a_Normal;       \n"
 	 + "varying vec4 v_Color;   \n"

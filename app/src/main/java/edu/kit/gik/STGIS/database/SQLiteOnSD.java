@@ -67,7 +67,7 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 		Log.w(TAG, "Upgrade der Datenbank von Version " + oldVersion + " zu "
-				+ newVersion + "; alle Daten werden gel�scht");
+				+ newVersion + "; alle Daten werden geloescht");
 		db.execSQL(TABLE_WFS_DROP);
 		onCreate(db);
 	}
@@ -75,7 +75,7 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	public void insert(String name, String url) {
 		long rowId = -1;
 		try {
-			// Datenbank �ffnen
+			// Datenbank oeffnen
 			SQLiteDatabase db = getWritableDatabase();
 			// die zu speichernden Werte
 			ContentValues values = new ContentValues();
@@ -90,7 +90,7 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	}
 
 	public Cursor query() {
-		// ggf. Datenbank �ffnen
+		// ggf. Datenbank oeffnen
 		SQLiteDatabase db = getWritableDatabase();
 		onCreate(db);
 		return db.query(WFS_TABLE_NAME, new String[] {_ID, WFS_NAME, WFS_URL, WFS_AVAILABILITY}, null, null, null, null,
@@ -98,7 +98,7 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	}
 
 	public void update(long id, int smiley) {
-		// ggf. Datenbank �ffnen
+		// ggf. Datenbank oeffnen
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
 //		values.put(MOOD_MOOD, smiley);
@@ -108,7 +108,7 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	}
 
 	public int delete(long id) {
-		// ggf. Datenbank �ffnen
+		// ggf. Datenbank oeffnen
 		SQLiteDatabase db = getWritableDatabase();
 		int numDeleted = db.delete(WFS_TABLE_NAME, _ID + " = ?",
 				new String[] { Long.toString(id) });

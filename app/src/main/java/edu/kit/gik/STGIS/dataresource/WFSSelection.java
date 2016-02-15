@@ -197,7 +197,7 @@ public class WFSSelection extends ListActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		// Kontextmen� entfalten
+		// Kontextmenue entfalten
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.wfs_context_menu, menu);
 	}
@@ -216,7 +216,7 @@ public class WFSSelection extends ListActivity {
 		}
 	}
 
-	public void readWebpage(View view) {
+    public void readWebpage(View view) {
 		DownloadWebPageTask task = new DownloadWebPageTask();
 		String url = baseURL + getString(R.string.Type)
 				+ getString(R.string.KVP_Separator)

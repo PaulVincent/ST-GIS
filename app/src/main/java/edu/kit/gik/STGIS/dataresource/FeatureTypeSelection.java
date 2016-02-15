@@ -7,7 +7,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -45,6 +49,7 @@ public class FeatureTypeSelection extends ListActivity {
     private static String chosenTypeName;
     private static String describeURL;
     private static String getURL;
+
     private static String time;
 
     private static final String ROW_ID_1 = "NAME";
@@ -72,6 +77,7 @@ public class FeatureTypeSelection extends ListActivity {
         for (int i = 0; i < intentData.length; i++) {
             Log.d("i", intentData[i]);
         }
+
         List<HashMap<String, String>> fillMaps = prepareData4List();
 
         adapter = new SimpleAdapter(this, fillMaps,
@@ -86,13 +92,8 @@ public class FeatureTypeSelection extends ListActivity {
         progressBar = (ProgressBar) findViewById(R.id.marker_progress);
         progressBar.setVisibility(View.INVISIBLE);
 
-//	    progressBar.setProgress(0);
-
-//		setContentView(R.layout.listfeaturetypes);
-        // getListView().setOnItemClickListener(this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        registerForContextMenu(getListView());
     }
 
     @SuppressWarnings("unchecked")
@@ -146,8 +147,6 @@ public class FeatureTypeSelection extends ListActivity {
             }
         };
 
-    //    Calendar myCalendar = Calendar.getInstance();
-
         new DatePickerDialog(this, date, 1990, 0,
                 1).show();
     }
@@ -156,10 +155,8 @@ public class FeatureTypeSelection extends ListActivity {
         List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
         for (int i = 0; i < intentData.length; i = i + 2) {
             HashMap<String, String> map = new HashMap<String, String>();
-//			Log.d("epsg", intentData[i]);
             if (!intentData[i].equalsIgnoreCase("wfs")) {
                 map.put(ROW_ID_1, intentData[i]);
-                //map.put(ROW_ID_2, intentData[i].split(":")[1]);
                 try {
                     ARActivity.epsg = Integer.parseInt(intentData[i + 1].split("EPSG:")[1]);
                     map.put(ROW_ID_3, intentData[i + 1].split("crs:")[1]);
@@ -224,87 +221,175 @@ public class FeatureTypeSelection extends ListActivity {
         client.disconnect();
     }
 
-private class DownloadWebPageTask extends
-	AsyncTask<String, Void, Boolean> {
+    public void readWebpage(View view) {
+        DownloadWebPageTask task = new DownloadWebPageTask();
+        task.execute(new String[]{describeURL, getURL});
+    }
+
+    public String getSearchTag(String url) {
+        // TODO Auto-generated method stub
+        if (url.contains(getString(R.string.Describe))) {
+            return SEARCH_TAG_DESCRIBE;
+        } else {
+            return SEARCH_TAG_GETFEATURE;
+        }
+    }
+
+    public static String readInputStreamAsString(InputStream in)
+            throws IOException {
+
+        BufferedInputStream bis = new BufferedInputStream(in);
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        int result = bis.read();
+        while (result != -1) {
+            byte b = (byte) result;
+            buf.write(b);
+            result = bis.read();
+        }
+        return buf.toString();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        // Kontextmenue entfalten
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.wfs_wps_context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.WFS_menu_WPS_query:
+                performWPSquery(item);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void performWPSquery(MenuItem item) {
+
+        // create query
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+                .getMenuInfo();
+
+        final HashMap<String, String> o = (HashMap<String, String>) getListAdapter()
+                .getItem(item.getOrder());
+
+        chosenTypeName = o.get(ROW_ID_1);
+        String[] objectAndSpace = chosenTypeName.split(":");
+
+        String wpsBaseURL = WFSSelection.baseURL.toUpperCase().replace("WFS", "WPS");
+
+        String wpsURL = wpsBaseURL +
+                getString(R.string.Version100)
+                + "&"
+                + getString(R.string.TypeWPS)
+                + "&"
+                + getString(R.string.Execute)
+                + "&"
+                + getString(R.string.AverageSpeed)
+                + "&"
+                + getString(R.string.Dateinputs)
+                + getString(R.string.Spacename)
+                + objectAndSpace[0]
+                + ";"
+                + getString(R.string.Objectname)
+                + objectAndSpace[1]
+                + "]";
+
+        Log.d("WPSurl", wpsURL);
+
+        WPSTask task = new WPSTask();
+        task.execute(wpsURL);
+    }
+
+    private class DownloadWebPageTask extends
+            AsyncTask<String, Void, Boolean> {
 //		int myProgress;
-		
-		@Override
-		protected Boolean doInBackground(String... urls) {
-			Boolean response = null;
-			for (String url : urls) {
-				DefaultHttpClient client = new DefaultHttpClient();
-				HttpGet httpGet = new HttpGet(url);
-				
-					HttpResponse execute;
-					try {
-						execute = client.execute(httpGet);
-						InputStream content = execute.getEntity().getContent();						
-						String res = readInputStreamAsString(content);
-						if (!res.startsWith("<?xml")) {
-							BufferedReader br;
-							br = new BufferedReader(new StringReader(res));
-							response = InteractiveActivity.setTSObject(br);
-							} else {
-								response = false;
-							}						
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			}
-			return response;
-		}
 
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (result) {
-				Intent intent = new Intent(FeatureTypeSelection.this,
-						InteractiveActivity.class);
-//				intent.putExtra(getString(R.string.TSObject), result);
-//				intent.putExtra("ResourceType", "WFS");
-				startActivity(intent);
-				progressBar.setVisibility(View.INVISIBLE);
-			} else {
-				progressBar.setVisibility(View.INVISIBLE);
-				Toast.makeText(FeatureTypeSelection.this, R.string.NOGOCAD,
-						Toast.LENGTH_LONG).show();
-			}
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            Boolean response = null;
+            for (String url : urls) {
+                DefaultHttpClient client = new DefaultHttpClient();
+                HttpGet httpGet = new HttpGet(url);
 
-		}
-	
-		protected void onPreExecute() {
-			   progressBar.setVisibility(View.VISIBLE);
-			  }
-	}
+                HttpResponse execute;
+                try {
+                    execute = client.execute(httpGet);
+                    InputStream content = execute.getEntity().getContent();
+                    String res = readInputStreamAsString(content);
+                    if (!res.startsWith("<?xml")) {
+                        BufferedReader br;
+                        br = new BufferedReader(new StringReader(res));
+                        response = InteractiveActivity.setTSObject(br);
+                    } else {
+                        response = false;
+                    }
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+            return response;
+        }
 
-	public void readWebpage(View view) {
-		DownloadWebPageTask task = new DownloadWebPageTask();
-		task.execute(new String[] { describeURL, getURL });
-	}
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Intent intent = new Intent(FeatureTypeSelection.this,
+                        InteractiveActivity.class);
 
-	public String getSearchTag(String url) {
-		// TODO Auto-generated method stub
-		if (url.contains(getString(R.string.Describe))) {
-			return SEARCH_TAG_DESCRIBE;
-		} else {
-			return SEARCH_TAG_GETFEATURE;
-		}
-	}
-	
-	public static String readInputStreamAsString(InputStream in) 
-		    throws IOException {
+                startActivity(intent);
+                progressBar.setVisibility(View.INVISIBLE);
+            } else {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(FeatureTypeSelection.this, R.string.NOGOCAD,
+                        Toast.LENGTH_LONG).show();
+            }
 
-		    BufferedInputStream bis = new BufferedInputStream(in);
-		    ByteArrayOutputStream buf = new ByteArrayOutputStream();
-		    int result = bis.read();
-		    while(result != -1) {
-		      byte b = (byte)result;
-		      buf.write(b);
-		      result = bis.read();
-		    }
-		    return buf.toString();
-		}
+        }
+
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private class WPSTask extends AsyncTask<String, String, String> {
+
+        protected String doInBackground(String... urls) {
+
+            // query
+            DefaultHttpClient client = new DefaultHttpClient();
+            HttpGet httpGet = new HttpGet(urls[0]);
+            String result = null;
+            HttpResponse execute;
+
+            try {
+                execute = client.execute(httpGet);
+                InputStream content = execute.getEntity().getContent();
+                result = readInputStreamAsString(content);
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        }
+    }
 }

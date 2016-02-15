@@ -18,8 +18,10 @@
     <string name="cancelItem">Cancel</string>
     
     <!-- Strings concerning WFS Context menu -->
-    <string name="WFS_delete">Delete Service</string>  
-    
+    <string name="WFS_delete">Delete Service</string>
+    <string name="WPS_query">WPS Query - Average Object Speed</string>
+
+
     <string name="FeatureTypeTitle">Choose Data Set</string>
     <string name="TSFilesTitle">Choose Data Set</string>
     <string name="TS_delete">Delete File</string>
@@ -29,13 +31,21 @@
     <string name="Describe">REQUEST=DescribeFeatureType</string>
     <string name="Capabilities">REQUEST=GetCapabilities</string>
     <string name="Feature">REQUEST=GetFeature</string>
-    
+
     <string name="Version100">VERSION=1.0.0</string>
     <string name="Version110">VERSION=1.1.0</string>
     <string name="Version20">VERSION=2.0</string>
     
     <string name="Typename">TYPENAME= </string>
-    
+
+    <!-- WPS Requests -->
+    <string name="TypeWPS">SERVICE=WPS</string>
+    <string name="AverageSpeed">IDENTIFIER=averagespeed</string>
+    <string name="Execute">REQUEST=Execute</string>
+    <string name="Dateinputs">DATAINPUTS=[</string>
+    <string name="Spacename">Spacename=</string>
+    <string name="Objectname">Objectname=</string>
+
     <string name="FileName">FILENAME</string>
     <string name="FileSize">FILESIZE</string>
     <string name="TSObject">TSOBJECT</string>
@@ -44,6 +54,7 @@
     <string name="FEATURE_TYPE_TAG">Name</string>
     <string name="SRS_TAG">DefaultSRS</string>
     <string name="DELETED">deleted</string>
+    <string name="WPS_query_average_Speed">Average Speed of the object: </string>
     <string name="FAILED">failed</string>
     <string name="KVP_Separator">&amp;</string>
     <string name="DataFolder">data</string>

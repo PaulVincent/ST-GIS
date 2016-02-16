@@ -42,7 +42,7 @@ import android.widget.Toast;
 import edu.kit.gik.STGIS.database.SQLiteOnSD;
 import edu.kit.gik.STGIS.xml.XMLHandler;
 
-public class WFSSelection extends ListActivity {
+public class WFSSelectionActivity extends ListActivity {
 
 	/**
 	 * Handler to access the SQLite database of the stored web feature services
@@ -273,14 +273,14 @@ public class WFSSelection extends ListActivity {
 				for (int i = 0; i < result.size(); i++) {
 					serviceResponse[i] = result.get(i);
 				}
-				Intent intent = new Intent(WFSSelection.this,
-						FeatureTypeSelection.class);
+				Intent intent = new Intent(WFSSelectionActivity.this,
+						QueryActivity.class);
 				intent.putExtra(FEATURE_TYPE_INFOS, serviceResponse);
 				startActivity(intent);
 				progressBar.setVisibility(View.INVISIBLE);
 			} else {
 				progressBar.setVisibility(View.INVISIBLE);
-				Toast.makeText(WFSSelection.this, R.string.NOWFS, Toast.LENGTH_LONG).show();
+				Toast.makeText(WFSSelectionActivity.this, R.string.NOWFS, Toast.LENGTH_LONG).show();
 			}
 			
 			

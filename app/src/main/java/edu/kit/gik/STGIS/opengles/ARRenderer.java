@@ -206,13 +206,6 @@ public static final boolean ZoomDown = false;
 			+ "   gl_FragColor = v_Color * diffuse;                                  \n"
 			+ "}                                                                     \n";
 
-	// private final String fragmentShaderCode =
-	// "precision mediump float;  \n" +
-	// "varying vec4 v_Color;      \n" +
-	// "void main(){              \n" +
-	// " gl_FragColor =  v_Color; \n" +
-	// "}                         \n";
-
 	public void onSurfaceCreated(GL10 unused, EGLConfig config) {
 
 		// Set the background frame color
@@ -228,42 +221,6 @@ public static final boolean ZoomDown = false;
 		layer = ARActivity.tsobj;
 		
 		eyeZ = xExtent;
-//		XX = xExtent;
-//		initShapes();
-
-//		// Define a simple shader program for our point.
-//		final String pointVertexShader = "uniform mat4 uMVPMatrix;      \n"
-//				+ "attribute vec4 vPosition;     \n"
-//				+ "void main()                    \n"
-//				+ "{                              \n"
-//				+ "   gl_Position = uMVPMatrix   \n"
-//				+ "               * vPosition;   \n"
-//				+ "   gl_PointSize = 5.0;         \n"
-//				+ "}                              \n";
-//
-//		final String pointFragmentShader = "precision mediump float;       \n"
-//				+ "void main()                    \n"
-//				+ "{                              \n"
-//				+ "   gl_FragColor = vec4(1.0,    \n"
-//				+ "   1.0, 1.0, 1.0);             \n"
-//				+ "}                              \n";
-//
-//		int PvertexShader = loadShader(GLES20.GL_VERTEX_SHADER,
-//				pointVertexShader);
-//		int PfragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
-//				pointFragmentShader);
-//
-//		PProgram = GLES20.glCreateProgram(); // create empty OpenGL Program
-//		GLES20.glAttachShader(PProgram, PvertexShader); // add the vertex shader
-//														// to program
-//		GLES20.glAttachShader(PProgram, PfragmentShader); // add the fragment
-//															// shader to program
-//		GLES20.glLinkProgram(PProgram);
-//
-//		myPPositionHandle = GLES20.glGetAttribLocation(PProgram, "vPosition");
-//		PuMVPMatrixHandle = GLES20.glGetUniformLocation(PProgram, "uMVPMatrix");
-//
-//		GLES20.glEnableVertexAttribArray(myPPositionHandle);
 
 		int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
 		int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
@@ -287,8 +244,6 @@ public static final boolean ZoomDown = false;
 
 		mMVMatrixHandle = GLES20.glGetUniformLocation(mProgram, "u_MVMatrix");
 		mLightPosHandle = GLES20.glGetUniformLocation(mProgram, "u_LightPos");
-//		Matrix.setLookAtM(mVMatrix, 0, eyeX, eyeY, xExtent, 0f, 0f, 0f, 0f, 1.0f,
-//				0.0f);
 	}
 
 	public void onDrawFrame(GL10 unused) {
@@ -311,9 +266,7 @@ public static final boolean ZoomDown = false;
 			mMMatrix = ARActivity.Q;
 			Matrix.translateM(mVMatrix, 0, mMOMatrix, 0, -eyeX, -eyeY, -eyeZ);
 			Matrix.multiplyMM(mMVMatrix, 0, mMMatrix, 0, mVMatrix, 0);
-//			Matrix.scaleM(mMVMatrix, 0, 2, 2, 2);
-			
-			
+
 		// Calculate light position
 		calcLightPos();
 
@@ -333,9 +286,6 @@ public static final boolean ZoomDown = false;
 		GLES20.glDrawElements(GLES20.GL_LINES,
 				layer.getLineBuffer().capacity(), GLES20.GL_UNSIGNED_INT,
 				layer.getLineBuffer());
-
-//		GLES20.glUseProgram(PProgram);
-//		drawPoints();
 	}
 
 	private void calcLightPos() {
@@ -376,14 +326,7 @@ public static final boolean ZoomDown = false;
 		GLES20.glEnableVertexAttribArray(myPPositionHandle);
 		GLES20.glUniformMatrix4fv(PuMVPMatrixHandle, 1, false, mMVPMatrix, 0);
 
-		// GLES20.glDrawArrays(GLES20.GL_POINTS, 0,
-		// layer.getVertexBuffer().capacity()/3);
-
 		layer.getLineBuffer().position(0);
-		// GLES20.glDrawElements(GLES20.GL_LINES,
-		// layer.getLineBuffer().capacity(),
-		// GLES20.GL_UNSIGNED_INT, layer.getLineBuffer());
-
 	}
 
 	public void onSurfaceChanged(GL10 unused, int width, int height) {
@@ -393,9 +336,7 @@ public static final boolean ZoomDown = false;
 		Log.d("ratio",Float.toString(ratio));
 		// this projection matrix is applied to object coodinates
 		// in the onDrawFrame() method
-//		Matrix.frustumM(mProjMatrix, 0, -ratio, ratio, -1, 1, 1f, xExtent + 5000);
 		Matrix.perspectiveM(mProjMatrix, 0, 49.465f, ratio, 1, 1000);
-
 	}
 
 	private void initShapes() {

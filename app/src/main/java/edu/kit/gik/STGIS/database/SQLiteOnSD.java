@@ -15,9 +15,6 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 
 	private static final String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-//	public SQLiteDatabase db;
-	
-	
 	private static final String TAG = SQLiteOnSD.class.getSimpleName();
 
 	private static final String DATABASE_NAME = "Services.db";
@@ -57,7 +54,6 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-//		db.execSQL(TABLE_WFS_DROP);
 		db.execSQL(TABLE_WFS_CREATE);
 		
 		Log.d("database", "generated");
@@ -101,10 +97,6 @@ public class SQLiteOnSD extends SQLiteOpenHelper {
 		// ggf. Datenbank oeffnen
 		SQLiteDatabase db = getWritableDatabase();
 		ContentValues values = new ContentValues();
-//		values.put(MOOD_MOOD, smiley);
-//		int numUpdated = db.update(TABLE_NAME_MOOD, values, _ID + " = ?",
-//				new String[] { Long.toString(id) });
-//		Log.d(TAG, "update(): id=" + id + " -> " + numUpdated);
 	}
 
 	public int delete(long id) {

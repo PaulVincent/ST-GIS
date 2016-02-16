@@ -29,7 +29,6 @@ public class ARSurfaceView extends GLSurfaceView {
 		mRenderer = new ARRenderer();
 		setRenderer(mRenderer);
 		getHolder().setFormat(PixelFormat.TRANSPARENT);
-//		getHolder().setFormat(PixelFormat.TRANSLUCENT);		
 		// Render the view only when there is a change
 		setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 	}
@@ -41,14 +40,7 @@ public class ARSurfaceView extends GLSurfaceView {
 	        final int action = event.getAction();
 	        switch (action & MotionEvent.ACTION_MASK) {
 	        case MotionEvent.ACTION_DOWN: {
-//	        	if (mRenderer.ZoomDown) {
 	        		ARActivity.setARprefs();
-//	        		ARActivity.myZoomBar.setEnabled(false);
-//		        	ARActivity.mPreview.mSurfaceView.setVisibility(SurfaceView.VISIBLE);
-		        	
-//	        	}
-	        	
-	            
 	        }
 	            
 	        case MotionEvent.ACTION_MOVE: {

@@ -335,23 +335,11 @@ public class GOCADConnector {
 			}
 		}
 
-		// if (!end) {
-		// /*
-		// * if no end has been reached, the file is inconsistent
-		// */
-		// throw new TSFormatException(
-		// "File read complete, but no 'END' reached");
-		// }
-		
 		InteractiveRenderer.xExtent = (maxX-minX);
 		Log.d("xextent", Float.toString((maxX-minX)));
 		ARRenderer.xExtent = (maxX-minX);
 		
 		Log.d("xExtent", Float.toString(InteractiveRenderer.xExtent));
-//		HelloOpenGLES20Renderer.yExtent = (maxY-minY);
-//		Log.d("yExtent", Float.toString(HelloOpenGLES20Renderer.yExtent));
-//		HelloOpenGLES20Renderer.zExtent = (maxZ-minZ);
-//		Log.d("zExtent", Float.toString(HelloOpenGLES20Renderer.zExtent));
 
 		return correctAll();
 	}

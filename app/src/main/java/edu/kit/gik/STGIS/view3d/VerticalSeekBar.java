@@ -1,7 +1,5 @@
 package edu.kit.gik.STGIS.view3d;
 
-import edu.kit.gik.STGIS.opengles.ARRenderer;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -10,16 +8,18 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.SeekBar;
 
+import edu.kit.gik.STGIS.opengles.ARRenderer;
+
 
 /**
  * This class extends the SeekBar class and is designed to work vertically.
- * 
+ *
  * @author Diogo Margues <diogohomemmarques@gmail.com>
  * @author Justin Wetherell <phishman3579@gmail.com>
  */
 public class VerticalSeekBar extends SeekBar {
 
-   	public VerticalSeekBar(Context context) {
+    public VerticalSeekBar(Context context) {
         super(context);
     }
 
@@ -30,7 +30,7 @@ public class VerticalSeekBar extends SeekBar {
     public VerticalSeekBar(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -64,48 +64,42 @@ public class VerticalSeekBar extends SeekBar {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//    	ARActivity.removeLocUpdates();
-    	if (!isEnabled()) {
-    	setMax((int) ARRenderer.eyeZ + 1);
-    	Log.d("test", "neu enabled");
-    	}
-    	setEnabled(true);
-    	ARActivity.mPreview.mSurfaceView.setVisibility(SurfaceView.INVISIBLE);
-    	
-    	Log.d("eventy", Float.toString(event.getY()));
-    	Log.d("getmax", Float.toString(getMax()));
-    	
-//        if (!isEnabled()) {
-//            return false;
-//        }
+        if (!isEnabled()) {
+            setMax((int) ARRenderer.eyeZ + 1);
+            Log.d("test", "neu enabled");
+        }
+        setEnabled(true);
+        ARActivity.mPreview.mSurfaceView.setVisibility(SurfaceView.INVISIBLE);
+
+        Log.d("eventy", Float.toString(event.getY()));
+        Log.d("getmax", Float.toString(getMax()));
 
         switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN:
-        case MotionEvent.ACTION_MOVE:
-        case MotionEvent.ACTION_UP:
-            setProgress(getMax() - (int) (getMax() * event.getY() / getHeight()));
-            float currentValue = getMax() - (int) (getMax() * event.getY() / getHeight());
-            float scaledValue = scaleValue(getMax(), ARActivity.minZ - 10, currentValue);
-//            ARRenderer.eyeZ = getMax() - (int) (getMax() * event.getY() / getHeight()) - 40;
-            ARRenderer.eyeZ = scaledValue;
-            ARRenderer.XX = getMax() - (int) (getMax() * event.getY() / getHeight()) - 40;
-            Log.d("minZ", Float.toString(ARActivity.minZ));
-            Log.d("scaledValue", Float.toString(ARRenderer.eyeZ));
-            onSizeChanged(getWidth(), getHeight(), 0, 0);
-            
-            break;
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_UP:
+                setProgress(getMax() - (int) (getMax() * event.getY() / getHeight()));
+                float currentValue = getMax() - (int) (getMax() * event.getY() / getHeight());
+                float scaledValue = scaleValue(getMax(), ARActivity.minZ - 10, currentValue);
+                ARRenderer.eyeZ = scaledValue;
+                ARRenderer.XX = getMax() - (int) (getMax() * event.getY() / getHeight()) - 40;
+                Log.d("minZ", Float.toString(ARActivity.minZ));
+                Log.d("scaledValue", Float.toString(ARRenderer.eyeZ));
+                onSizeChanged(getWidth(), getHeight(), 0, 0);
 
-        case MotionEvent.ACTION_CANCEL:
-            break;
+                break;
+
+            case MotionEvent.ACTION_CANCEL:
+                break;
         }
         return true;
     }
 
-	private float scaleValue(float topBorderIn, float bottomBorderOut, float currentValue) {
-		float scaledValue = 0;
-		float midin = (topBorderIn)/2;
-		float midout = (topBorderIn + bottomBorderOut)/2;
-		scaledValue = midin + (midout - midin) + (currentValue-midin)*((topBorderIn-midout)/(topBorderIn-midin));
-		return scaledValue;
-	}
+    private float scaleValue(float topBorderIn, float bottomBorderOut, float currentValue) {
+        float scaledValue = 0;
+        float midin = (topBorderIn) / 2;
+        float midout = (topBorderIn + bottomBorderOut) / 2;
+        scaledValue = midin + (midout - midin) + (currentValue - midin) * ((topBorderIn - midout) / (topBorderIn - midin));
+        return scaledValue;
+    }
 }

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileListFilter implements FilenameFilter {
+public class FileListFilterHelper implements FilenameFilter {
+
 		private String name;
 
 		private List<String> extension = new ArrayList<String>();
 
-		public FileListFilter(String name, String[] ext) {
+		public FileListFilterHelper(String name, String[] ext) {
 			this.name = name;
 			this.extension = Arrays.asList(ext);
 		}

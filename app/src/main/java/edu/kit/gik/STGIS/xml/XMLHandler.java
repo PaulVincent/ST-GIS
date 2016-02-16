@@ -1,76 +1,68 @@
 package edu.kit.gik.STGIS.xml;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import android.util.Log;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.util.Log;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class XMLHandler extends DefaultHandler {
 
-	public String elementValue = null;
-	Boolean elementOn = false;
-	public String searchTag;
-	public String currentName;
-	public List<String> searchTags;
-	public ArrayList<String> data = new ArrayList<String>();
-	public HashMap<String,String> data1 = new HashMap<String,String>();
-	
-	
-	public XMLHandler(String[] tags) {
-		// TODO Auto-generated constructor stub
-		searchTags = Arrays.asList(tags);		
-//		searchTag = tag;
-	}
-	/**
-	 * This will be called when the tags of the XML starts.
-	 **/
-	@Override
-	public void startElement(String uri, String localName, String qName,
-			Attributes attributes) throws SAXException {
+    public String elementValue = null;
+    Boolean elementOn = false;
+    public String searchTag;
+    public String currentName;
+    public List<String> searchTags;
+    public ArrayList<String> data = new ArrayList<String>();
+    public HashMap<String, String> data1 = new HashMap<String, String>();
 
-//		if (qName.equals(searchTag)) {			
-//			elementOn = true;
-//		}
-		if (searchTags.contains(qName)) {
-			elementOn = true;			
-		}
-		
-//		if (qName.equals("gml:coordinates")) {
-//			elementOn = true;
-//		}
-	}
 
-	/**
-	 * This will be called when the tags of the XML end.
-	 **/
-	@Override
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+    public XMLHandler(String[] tags) {
+        // TODO Auto-generated constructor stub
+        searchTags = Arrays.asList(tags);
+    }
 
-		elementOn = false;
-	}
+    /**
+     * This will be called when the tags of the XML starts.
+     **/
+    @Override
+    public void startElement(String uri, String localName, String qName,
+                             Attributes attributes) throws SAXException {
 
-	/**
-	 * This is called to get the tags value
-	 **/
-	@Override
-	public void characters(char[] ch, int start, int length)
-			throws SAXException {
+        if (searchTags.contains(qName)) {
+            elementOn = true;
+        }
+    }
 
-		if (elementOn) {
-			elementValue = new String(ch, start, length);
-			elementOn = false;
-			if (elementValue != null) {
-				data.add(elementValue);
-				Log.d("elementValue ", elementValue);
-			}
-			
-		}
-	}
+    /**
+     * This will be called when the tags of the XML end.
+     **/
+    @Override
+    public void endElement(String uri, String localName, String qName)
+            throws SAXException {
+
+        elementOn = false;
+    }
+
+    /**
+     * This is called to get the tags value
+     **/
+    @Override
+    public void characters(char[] ch, int start, int length)
+            throws SAXException {
+
+        if (elementOn) {
+            elementValue = new String(ch, start, length);
+            elementOn = false;
+            if (elementValue != null) {
+                data.add(elementValue);
+                Log.d("elementValue ", elementValue);
+            }
+        }
+    }
 }

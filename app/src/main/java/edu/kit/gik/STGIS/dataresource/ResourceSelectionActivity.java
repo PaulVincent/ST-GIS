@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ResourceSelection extends Activity {
+public class ResourceSelectionActivity extends Activity {
 
 	/**
 	 * Button to choose the SD Card of the device to search for files
@@ -36,10 +36,10 @@ public class ResourceSelection extends Activity {
 			public void onClick(View v) {
 				String extState = Environment.getExternalStorageState();
 				if(!extState.equals(Environment.MEDIA_MOUNTED)) {
-					Toast.makeText(ResourceSelection.this, "No SD Card mounted!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ResourceSelectionActivity.this, "No SD Card mounted!", Toast.LENGTH_SHORT).show();
 				} else {
-					Intent intent = new Intent(ResourceSelection.this,
-							DataOnSDSelection.class);
+					Intent intent = new Intent(ResourceSelectionActivity.this,
+							FileSelectionActivity.class);
 					startActivity(intent);
 				}				
 			}
@@ -49,8 +49,8 @@ public class ResourceSelection extends Activity {
 		wfs.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Intent intent = new Intent(ResourceSelection.this,
-						WFSSelection.class);
+				Intent intent = new Intent(ResourceSelectionActivity.this,
+						WFSSelectionActivity.class);
 				startActivity(intent);
 			}
 		});

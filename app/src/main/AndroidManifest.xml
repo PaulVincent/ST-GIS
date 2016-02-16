@@ -22,7 +22,7 @@
         android:icon="@drawable/erdegreentest"
         android:label="@string/app_name" android:debuggable="true">
         <activity
-            android:name="edu.kit.gik.STGIS.dataresource.ResourceSelection"
+            android:name=".ResourceSelectionActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,21 +46,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.kit.gik.STGIS.dataresource.WFSSelection"
+            android:name=".WFSSelectionActivity"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.kit.gik.STGIS.dataresource.FeatureTypeSelection"
+            android:name=".QueryActivity"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.kit.gik.STGIS.dataresource.DataOnSDSelection"
+            android:name=".FileSelectionActivity"
             android:label="@string/app_name" >
             <intent-filter>
                <category android:name="android.intent.category.LAUNCHER" />

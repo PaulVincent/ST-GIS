@@ -42,7 +42,7 @@ import java.util.List;
 import edu.kit.gik.STGIS.view3d.ARActivity;
 import edu.kit.gik.STGIS.view3d.InteractiveActivity;
 
-public class FeatureTypeSelection extends ListActivity {
+public class QueryActivity extends ListActivity {
 
     private static String[] intentData;
     private static SimpleAdapter adapter;
@@ -120,7 +120,7 @@ public class FeatureTypeSelection extends ListActivity {
                 time = sdf.format(myCalendar.getTime());
 
                 chosenTypeName = (String) o.get(ROW_ID_1);
-                describeURL = WFSSelection.baseURL +
+                describeURL = WFSSelectionActivity.baseURL +
                         getString(R.string.Describe)
                         + "&"
                         +
@@ -129,7 +129,7 @@ public class FeatureTypeSelection extends ListActivity {
                         getString(R.string.Typename)
                         + chosenTypeName;
 
-                getURL = WFSSelection.baseURL +
+                getURL = WFSSelectionActivity.baseURL +
                         getString(R.string.Feature)
                         + "&"
                         +
@@ -174,7 +174,7 @@ public class FeatureTypeSelection extends ListActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             intentData = extras
-                    .getStringArray(WFSSelection.FEATURE_TYPE_INFOS);
+                    .getStringArray(WFSSelectionActivity.FEATURE_TYPE_INFOS);
             return intentData;
         } else {
             return null;
@@ -190,7 +190,7 @@ public class FeatureTypeSelection extends ListActivity {
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "FeatureTypeSelection Page", // TODO: Define a title for the content shown.
+                "QueryActivity Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -209,7 +209,7 @@ public class FeatureTypeSelection extends ListActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "FeatureTypeSelection Page", // TODO: Define a title for the content shown.
+                "QueryActivity Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -283,7 +283,7 @@ public class FeatureTypeSelection extends ListActivity {
         chosenTypeName = o.get(ROW_ID_1);
         String[] objectAndSpace = chosenTypeName.split(":");
 
-        String wpsBaseURL = WFSSelection.baseURL.toUpperCase().replace("WFS", "WPS");
+        String wpsBaseURL = WFSSelectionActivity.baseURL.toUpperCase().replace("WFS", "WPS");
 
         String wpsURL = wpsBaseURL +
                 getString(R.string.Version100)
@@ -345,14 +345,14 @@ public class FeatureTypeSelection extends ListActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Intent intent = new Intent(FeatureTypeSelection.this,
+                Intent intent = new Intent(QueryActivity.this,
                         InteractiveActivity.class);
 
                 startActivity(intent);
                 progressBar.setVisibility(View.INVISIBLE);
             } else {
                 progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(FeatureTypeSelection.this, R.string.NOGOCAD,
+                Toast.makeText(QueryActivity.this, R.string.NOGOCAD,
                         Toast.LENGTH_LONG).show();
             }
 

@@ -16,13 +16,6 @@ public class CoordinateTrafo {
 		targetCRF = new DatumParams(target);
 	}
 
-//	public static void main(String[] args) {
-//		CoordinateTrafo ct = new CoordinateTrafo(4326);
-//		double[] GK = ct.transformCoordinate(49, 8, 120);
-//		System.out.println("rechtswert " + (float) GK[0] + "\n" + "hochswert " + (float) GK[1]);
-//
-//	}
-
 	public double calcL0(double L) {
 		double L0 = 0;
 

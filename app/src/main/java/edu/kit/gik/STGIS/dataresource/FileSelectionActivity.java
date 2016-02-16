@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import edu.kit.gik.STGIS.view3d.InteractiveActivity;
 
-public class DataOnSDSelection extends ListActivity {
+public class FileSelectionActivity extends ListActivity {
 
 	/**
 	 * Adapter to fill ListView with existing .ts-files
@@ -86,7 +86,7 @@ public class DataOnSDSelection extends ListActivity {
 	private void searchTSFiles() {
 		File dir = new File(dataPath);
 		Log.d("data", dir.toString());
-		FilenameFilter filter = new FileListFilter(null, new String[] { "ts" });
+		FilenameFilter filter = new FileListFilterHelper(null, new String[] { "ts" });
 		files = dir.listFiles(filter);
 		Log.d("wq", files.toString());
 		if (files.length == 0) {
@@ -153,7 +153,7 @@ public class DataOnSDSelection extends ListActivity {
 
 		loadTSFile();
 
-		// Intent intent = new Intent(DataOnSDSelection.this,
+		// Intent intent = new Intent(FileSelectionActivity.this,
 		// InteractiveActivity.class);
 		// intent.putExtra(getString(R.string.TSObject), dataPath +
 		// File.separator
@@ -226,7 +226,7 @@ public class DataOnSDSelection extends ListActivity {
 		protected void onPostExecute(Boolean result) {
 
 			if (result) {
-				Intent intent = new Intent(DataOnSDSelection.this,
+				Intent intent = new Intent(FileSelectionActivity.this,
 						InteractiveActivity.class);
 //				intent.putExtra(getString(R.string.TSObject), result);
 //				intent.putExtra("ResourceType", "WFS");
@@ -234,7 +234,7 @@ public class DataOnSDSelection extends ListActivity {
 				progressBar.setVisibility(View.INVISIBLE);
 			} else {
 				progressBar.setVisibility(View.INVISIBLE);
-				Toast.makeText(DataOnSDSelection.this, R.string.READFILEERROR,
+				Toast.makeText(FileSelectionActivity.this, R.string.READFILEERROR,
 						Toast.LENGTH_LONG).show();
 			}
 
